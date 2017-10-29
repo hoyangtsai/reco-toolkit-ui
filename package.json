@@ -1,0 +1,28 @@
+{
+  "name": "nodinx-toolkit-ui",
+  "version": "1.0.0",
+  "description": "nodinx ui toolkit",
+  "main": "bin/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "directories": {
+    "lib": "./lib"
+  },
+  "keywords": [
+    "webpack",
+    "nodinx"
+  ],
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "chalk": "^2.3.0",
+    "hexo-fs": "^0.2.2",
+    "html-webpack-plugin": "^2.30.1",
+    "progress-bar-webpack-plugin": "^1.10.0",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.3",
+    "webpack-merge": "^4.1.0"
+  },
+  "author": "keithytsai <keithytsai@tencent.com>",
+  "license": "Tencent Private"
+}
