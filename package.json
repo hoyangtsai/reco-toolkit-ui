@@ -1,22 +1,29 @@
 {
-  "name": "nodinx-toolkit-ui",
+  "name": "@tencent/reco-toolkit-ui",
   "version": "1.0.0",
-  "description": "nodinx ui toolkit",
+  "description": "reco ui toolkit",
   "main": "bin/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://git.code.oa.com/WSRD-Tech-Center-Lib/reco-toolkit-ui.git"
   },
   "directories": {
     "lib": "./lib"
   },
   "keywords": [
     "webpack",
-    "nodinx"
+    "nodinx",
+    "reco",
+    "recombl"
   ],
   "dependencies": {
+    "@tencent/nodinx-cli": "^1.1.0",
     "bluebird": "^3.5.1",
     "chalk": "^2.3.0",
-    "hexo-fs": "^0.2.2",
+    "debug": "^3.1.0",
     "html-webpack-plugin": "^2.30.1",
     "progress-bar-webpack-plugin": "^1.10.0",
     "webpack": "^3.8.1",
