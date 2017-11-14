@@ -20,15 +20,31 @@
     "recombl"
   ],
   "dependencies": {
-    "@tencent/nodinx-cli": "^1.1.0",
+    "autoprefixer": "^7.1.6",
     "bluebird": "^3.5.1",
+    "cache-loader": "^1.1.0",
     "chalk": "^2.3.0",
+    "css-loader": "^0.28.7",
     "debug": "^3.1.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.5",
     "html-webpack-plugin": "^2.30.1",
+    "lodash": "^4.17.4",
+    "mkdirp": "^0.5.1",
+    "node-sass": "^4.6.1",
+    "null-loader": "^0.1.1",
+    "postcss-flexbugs-fixes": "^3.2.0",
+    "postcss-gradientfixer": "0.0.6",
+    "postcss-loader": "^2.0.8",
     "progress-bar-webpack-plugin": "^1.10.0",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.3",
-    "webpack-merge": "^4.1.0"
+    "webpack-merge": "^4.1.0",
+    "yargs": "^10.0.3"
   },
   "author": "keithytsai <keithytsai@tencent.com>",
   "license": "Tencent Private"
