@@ -24,3 +24,21 @@ reco init
 reco help init
 ```
 
+4. 項目結構
+
+```
+.
+├── README.md
+├── client
+│   ├── container
+│   │   └── index.js
+│   └── style
+│       └── index.scss
+├── config
+│   └── reco-config.js
+├── jsconfig.json
+├── package-lock.json
+├── package.json
+└── template
+    └── index.dev.ejs
+```
