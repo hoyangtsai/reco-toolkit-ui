@@ -21,7 +21,7 @@
     "recombl"
   ],
   "dependencies": {
-    "@tencent/comby-stat-plugin": "^1.0.1",
+    "@tencent/comby-stat-plugin": "^1.0.4",
     "archiver": "^2.1.0",
     "autoprefixer": "^7.1.6",
     "babel-core": "^6.26.0",
