@@ -1,5 +1,9 @@
 # reco-toolkit-ui
 
+- [使用說明](#使用說明)
+- [舊項目遷移](#舊項目遷移)
+- [FAQ](#faq)
+
 ## 使用說明
 
 ### 安裝 reco-cli
@@ -112,7 +116,7 @@ module.exports = {
 * devDirectory - 開發環境 `reco server` 暫時文件目錄，以及本地服務器根目錄位置。
 * webpack - 配置與官方文件說明用法相同 https://doc.webpack-china.org/configuration/ <br>recoCustom 為 webpack 客制的配置
   1. commonsChunk 用來輸出公共樣式文件，配置說明可參考 https://doc.webpack-china.org/plugins/commons-chunk-plugin/
-  2. HtmlWebpackPlugin 用 [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) 的 ejs 模版動態生成 HTML 文件，目前只提供 template 配置，可傳入字串或數組，示例如下
+  2. HtmlWebpackPlugin 用 [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) 的模版功能，動態生成 HTML 文件，目前只提供 template 配置，可傳入字串或數組，示例如下
 ```
 // 所有 entry 使用一個模版
 HtmlWebpackPlugin: {
@@ -132,11 +136,12 @@ HtmlWebpackPlugin: {
 * sprites - 暫時無法使用
 
 ### 支持指令
-如果 reco-cli 有找到項目相對應的 toolkit 可以透過 `reco help` 列出目前支持的指令。<br>
-目前 reco-toolkit-ui 支持指令<br>
-`reco server` 本地開發，啟動服務器 & 監聽文件<br>
-`reco build` 生成 html, css 和 js 靜態文件<br>
-`reco upload` 打包 publish 文件夾，上傳 wapstatic 服務器<br>
+如果 reco-cli 有找到項目相對應的 toolkit 可以透過 `reco help` 列出目前支持的指令。
+
+目前 reco-toolkit-ui 支持指令
+`reco server` 本地開發，啟動服務器 & 監聽文件
+`reco build` 生成 html, css 和 js 靜態文件
+`reco upload` 打包 publish 文件夾，上傳 wapstatic 服務器
 
 ## 舊項目遷移
 1. 卸載舊版 reco: `tnpm un -g recombl`
