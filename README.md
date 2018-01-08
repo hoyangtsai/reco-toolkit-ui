@@ -6,10 +6,11 @@
 
 ## 使用說明
 
-### 安裝 reco-cli
-先在全局安裝 reco-cli
+### 安裝
+安裝 reco-cli & reco-toolkit-ui
 ```bash
-tnpm install -g @tencent/reco
+tnpm install -gd @tencent/reco
+tnpm install -gd @tencent/reco-toolkit-ui
 ```
 
 ### 創建新項目
