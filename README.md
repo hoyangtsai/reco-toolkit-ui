@@ -44,7 +44,7 @@ reco help init
 ├── package-lock.json
 ├── package.json
 └── template
-    └── index.dev.ejs
+    └── common.ejs
 ```
 * container/index.js 是開發頁面的路口，透過 reco-config.js 配置
 * template/index.dev.js 是HTML頁面的通用模版（之後會支持多模版）
@@ -52,6 +52,7 @@ reco help init
 ### 配置文件
 ```js
 const path = require('path');
+const pkgJson = require('../package.json');
 
 module.exports = {
   postcss: false, //true or false
@@ -77,16 +78,25 @@ module.exports = {
       rules: [
       ]
     },
-    plugins: {
+    plugins: [],
+    recoCustom: {
       commonsChunk: {
         name: null, //公共js、样式文件名，默认common
         minChunks: null, //至少几个文件出现才抽取公共
         exclude: []
       },
       HtmlWebpackPlugin: {
-        template: path.join(process.cwd(), "template/index.dev.ejs"),
+        template: path.join(process.cwd(), "template/common.ejs"),
       }
     }
+  },
+
+  upload: {
+    project: pkgJson.name,
+    user: pkgJson.author,
+    host: 'http://wapstatic.sparta.html5.qq.com/upload',
+    timeout: 30000,
+    dir: 'publish'
   },
 
   sprites: {
@@ -100,7 +110,25 @@ module.exports = {
 ```
 * postcss - 設置 `true` 使用 QQ瀏覽器 postcss 默認配置 (autoprefixer, postcss-flexbugs-fixes, postcss-gradientfixer）
 * devDirectory - 開發環境 `reco server` 暫時文件目錄，以及本地服務器根目錄位置。
-* webpack - 全部官方配置用法相同，除了 plugins 是暫時無法自行配置。 plugins 配置目前只用來指定公共模塊和透過 html-webpack-plugin 指定的 ejs 模版動態生成 html 文件。
+* webpack - 配置與官方文件說明用法相同 https://doc.webpack-china.org/configuration/ <br>recoCustom 為 webpack 客制的配置
+  1. commonsChunk 用來輸出公共樣式文件，配置說明可參考 https://doc.webpack-china.org/plugins/commons-chunk-plugin/
+  2. HtmlWebpackPlugin 用 [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) 的 ejs 模版動態生成 HTML 文件，目前只提供 template 配置，可傳入字串或數組，示例如下
+```
+// 所有 entry 使用一個模版
+HtmlWebpackPlugin: {
+  template: path.join(process.cwd(), "template/common.ejs"),
+}
+
+// 特定 entry 需要自己的模版
+HtmlWebpackPlugin: {
+  template: [
+    path.join(process.cwd(), "template/common.ejs"), // 其餘未指定 webpack entry 使用公共模版
+    { 'page-a' : path.join(process.cwd(), 'template/page-a.ejs') },
+    { 'page-b' : path.join(process.cwd(), 'template/page-b.ejs') },
+  ]
+}
+```
+* upload - 指定 dir 根目錄，如果上傳 host 沒改，線上地址為 `http://wapstatic.sparta.html5.qq.com/{$user}/{$project}/`
 * sprites - 暫時無法使用
 
 ### 支持指令
@@ -110,10 +138,23 @@ module.exports = {
 `reco build` 生成 html, css 和 js 靜態文件<br>
 `reco upload` 打包 publish 文件夾，上傳 wapstatic 服務器<br>
 
-## FAQ
+## 舊項目遷移
+1. 卸載舊版 reco: `tnpm un -g recombl`
+2. 安裝新版 reco: `tnpm i -gd @tencent/reco`
+3. 安裝 reco 重構工具箱: `tnpm i -gd @tencent/reco-toolkit-ui`
 
+### 注意點
+1. pageConfig.js 和 userConfig.js 合并到 reco-config.js (可以用 reco init 新增項目參考)
+2. package.json 配置
+    * 必須配置 template 欄位
+    * name, author, repository 是用來統計頁面的
+  ![package.json 配置](docs/pkg-json-config.png?raw=true)
+
+以上配置均可參考 qb-weather reco 分支 http://git.code.oa.com/rickiezheng/qb-weather/tree/reco
+
+## FAQ
 1. Windows node-sass 安裝失敗
-![Windows node-sass build failure](docs/win-install-node-sass-error.png?raw=true "Windows node-sass build failure")
+![Windows node-sass build failure](docs/win-install-node-sass-error.png?raw=true)
 ```bash
 npm install --global --production windows-build-tools
 ```
