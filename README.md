@@ -149,6 +149,8 @@ HtmlWebpackPlugin: {
 2. 安裝新版 reco: `tnpm i -gd @tencent/reco`
 3. 安裝 reco 重構工具箱: `tnpm i -gd @tencent/reco-toolkit-ui`
 
+ps. 如果要與舊版 recombl 並行使用，可以執行 `tnpm i -gd recombl@legacy` 安裝。安裝之後命令行名稱改為 `reco1`，指令和之前版本一樣。
+
 ### 注意點
 1. pageConfig.js 和 userConfig.js 合并到 reco-config.js (可以用 reco init 新增項目參考)
 2. package.json 配置
