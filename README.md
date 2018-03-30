@@ -166,3 +166,8 @@ ps. 如果要與舊版 recombl 並行使用，可以執行 `tnpm i -gd recombl@l
 ```bash
 npm install --global --production windows-build-tools
 ```
+
+## TODO
+* url-loader 沒有找到沒報錯
+* 工具自帶 file-loader, url-loader
+* 模版定義支援 widecard expression (ex. `album/*: path/to/file/album.ejs`)
