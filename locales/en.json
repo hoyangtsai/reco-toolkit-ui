@@ -1,3 +1,5 @@
 {
-  "%s defined template %s not found.": "%s defined template %s not found."
+  "%s defined template %s not found.": "%s defined template %s not found.",
+  "Port %s has been used. Try another port instead.": "Port %s has been used. Try another port instead.",
+  "Invalid port number of %s. Try another port number between 1 and 65535.": "Invalid port number of %s. Try another port number between 1 and 65535."
 }

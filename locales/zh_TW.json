@@ -1,3 +1,5 @@
 {
-  "%s defined template %s not found.": "%s 設定的模版 %s 找不到"
+  "%s defined template %s not found.": "%s 設定的模版 %s 找不到",
+  "Port %s has been used. Try another port instead.": "埠 %s 已經被使用。嘗試另一個埠。",
+  "Invalid port number of %s. Try another port number between 1 and 65535.": "無效的 %s 埠號碼。嘗試另一埠號於 1 和 65535 之間。"
 }
