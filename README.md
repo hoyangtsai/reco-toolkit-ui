@@ -190,7 +190,7 @@ module.exports = {
 }
 ```
 生成畫面
-![qb-weather list.html](docs/qb-weather-list.jpg?raw=true)
+![qb-weather list.html](http://git.code.oa.com/mxd/reco-toolkit-ui/raw/master/docs/qb-weather-list.jpg?raw=true)
 
 * Demo 2 - qb-softgame
 ```
@@ -236,7 +236,7 @@ module.exports = {
 }
 ```
 生成畫面
-![qb-weather list.html](docs/qb-softgame-list.jpg?raw=true)
+![qb-weather list.html](http://git.code.oa.com/mxd/reco-toolkit-ui/raw/master/docs/qb-softgame-list.jpg?raw=true)
 
 ### 支持指令
 如果 reco-cli 有找到項目相對應的 toolkit 可以透過 `reco help` 列出目前支持的指令。
@@ -257,11 +257,11 @@ module.exports = {
 2. package.json 配置
     * 必須配置 template 欄位
     * name, author, repository 是用來統計頁面的
-  ![package.json 配置](docs/pkg-json-config.png?raw=true)
+  ![package.json 配置](http://git.code.oa.com/mxd/reco-toolkit-ui/raw/master/docs/pkg-json-config.png?raw=true)
 
 ## FAQ
 1. Windows node-sass 安裝失敗
-![Windows node-sass build failure](docs/win-install-node-sass-error.png?raw=true)
+![Windows node-sass build failure](http://git.code.oa.com/mxd/reco-toolkit-ui/raw/master/docs/win-install-node-sass-error.png?raw=true)
 ```bash
 npm install --global --production windows-build-tools
 ```
