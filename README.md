@@ -25,7 +25,7 @@ reco init
 ? Please select a boilerplate type
 > 0 - Pure webrebuild boilerplate
 ```
-註: 在空文件夾執行 reco init，會直接當前目錄建立項目結構和文件；在非空文件夾中執行 reco init，會告知當前目錄已有文件，並詢問新項目文件夾名稱。
+  > 在空文件夾執行 reco init，會直接當前目錄建立項目結構和文件；在非空文件夾中執行 reco init，會告知當前目錄已有文件，並詢問新項目文件夾名稱。
 
 用 help 指令查看 init 有哪些其他可選項
 ```bash
@@ -50,8 +50,10 @@ reco help init
 └── template
     └── common.ejs
 ```
-* container/index.js 是開發頁面的路口，透過 reco-config.js 配置
-* template/index.dev.js 是HTML頁面的通用模版（之後會支持多模版）
+* container/index.js
+  * 開發頁面的入口，透過 reco-config.js 配置
+* template/common.ejs
+  * HTML頁面的通用模版（支持多模版）
 
 ### 配置文件
 ```js
@@ -117,38 +119,44 @@ module.exports = {
   },
 }
 ```
-* postcss - 設置 `true` 使用 QQ瀏覽器 postcss 默認配置 (autoprefixer, postcss-flexbugs-fixes, postcss-gradientfixer）
-* devDirectory - 開發環境 `reco server` 暫時文件目錄，以及本地服務器根目錄位置。
-* webpack - 配置與官方文件說明用法相同 https://doc.webpack-china.org/configuration/ <br>recoCustom 為 webpack 客制的配置
-  1. commonsChunk 用來輸出公共樣式文件，配置說明可參考 https://doc.webpack-china.org/plugins/commons-chunk-plugin/
-  2. HtmlWebpackPlugin 用 [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) 的模版功能，動態生成 HTML 文件，目前只提供 template 配置，可傳入字串或數組，示例如下
-```
-// 所有 entry 使用一個模版
-HtmlWebpackPlugin: {
-  template: path.join(process.cwd(), "template/common.ejs"),
-}
+* postcss 
+  * 設置 `true` 使用 QQ瀏覽器 postcss 默認配置 (autoprefixer, postcss-flexbugs-fixes, postcss-gradientfixer）
+* devDirectory 
+  * 開發環境 `reco server` 臨時文件目錄，以及本地服務器根目錄位置。
+* webpack
+  * 配置與官方文件說明用法相同 https://doc.webpack-china.org/configuration/
+  * recoCustom 為 webpack 客制的配置
+    1. commonsChunk 用來輸出公共樣式文件，配置說明可參考 https://doc.webpack-china.org/plugins/commons-chunk-plugin/
+    2. HtmlWebpackPlugin 用 [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) 的模版功能，動態生成 HTML 文件，目前只提供 template 配置，可傳入字串或數組，示例如下
+    ```
+    // 所有 entry 使用一個模版
+    HtmlWebpackPlugin: {
+      template: path.join(process.cwd(), "template/common.ejs"),
+    }
 
-// 特定 entry 需要自己的模版
-HtmlWebpackPlugin: {
-  template: [
-    path.join(process.cwd(), "template/common.ejs"), // 其餘未指定 webpack entry 使用公共模版
-    { 'page-a' : path.join(process.cwd(), 'template/page-a.ejs') },
-    { 'page-b' : path.join(process.cwd(), 'template/page-b.ejs') },
-  ]
-}
-```
-* upload - 指定 dir 根目錄，如果上傳 host 沒改，線上地址為 `http://wapstatic.sparta.html5.qq.com/{$user}/{$project}/`
-* sprites - 暫時無法使用
+    // 特定 entry 需要自己的模版
+    HtmlWebpackPlugin: {
+      template: [
+        path.join(process.cwd(), "template/common.ejs"), // 其餘未指定 webpack entry 使用公共模版
+        { 'page-a' : path.join(process.cwd(), 'template/page-a.ejs') },
+        { 'page-b' : path.join(process.cwd(), 'template/page-b.ejs') },
+      ]
+    }
+    ```  
+  * upload
+    * 指定 dir 根目錄，如果上傳 host 沒改，線上地址為 `http://wapstatic.sparta.html5.qq.com/{$upload.user}/{$upload.project}/`
+  * sprites - 暫時無法使用
 
-#### 自動生成頁面列表
-工具支持自動生成頁面列表（list.html），單純列出webpack所配置所有入口html連結，如果要自定義list.html列表結構，請參考以下示例<br>
-Demo 1
+#### 自動生成頁面列表 (list.html)
+工具支持自動生成頁面列表，如果無配置，單純列出webpack entry 所有連結; 要自定義列表結構，請參考以下示例
+* Demo 1 - qb-weather
 ```
 module.exports = {
   webpack: {
     entry: {
       index: ["index", "index-share", "share-edit", "share-card", "city-manage", "city-add", "city-search", "city-search-blank", "share-input", "loading", "city-popup"],
     }
+    ...
   },
   listHtml: {
     title: '天气 3.0',
@@ -161,6 +169,7 @@ module.exports = {
       },
       {
         title: '城市管理',
+        // pages 對應 webpack 的 entry
         pages: [
           {name: '城市添加', path: 'city-add'},
           {name: '城市管理', path: 'city-manage'},
@@ -177,10 +186,57 @@ module.exports = {
       }
     ]
   },
+  ...
 }
 ```
-ps. listHtml 的 group pages.path 對應的是 webpack 的 entry
+生成畫面
+![qb-weather list.html](docs/qb-weather-list.jpg?raw=true)
 
+* Demo 2 - qb-softgame
+```
+module.exports = {
+  webpack: {
+    entry: {
+      'main-portal': [
+        'new/portal-home-new',
+        'new/portal-home',
+        'new/gametab-detail-home-new',
+        'portal-game-center',
+        'dialog-ams',
+      ],
+      'main-fast-portal': [
+        'new/portal-home',
+      ],
+      'main-softgame': [
+        'gametab-detail-home',
+      ],
+      'main-softgame-detail': [
+        'gametab-detail-home-min',
+      ],
+      'main-middle-page': [
+        'middle-page',
+      ],
+    },
+    ...
+  },
+  listHtml: {
+    groups: [
+      {
+        pages: [
+          {name: '无题-new/protal-home-new', path: 'new/protal-home-new'},
+          {name: '无题-new/protal-home', path: 'new/protal-home'},
+          {name: '无题-new/gametab-detail-home-new', path: 'new/gametab-detail-home-new'},
+          {name: '无题-gametab-detail-home', path: 'gametab-detail-home'},
+          {name: '无题-middle-page', path: 'middle-page'}
+        ]
+      }
+    ]
+  },
+  ...
+}
+```
+生成畫面
+![qb-weather list.html](docs/qb-softgame-list.jpg?raw=true)
 
 ### 支持指令
 如果 reco-cli 有找到項目相對應的 toolkit 可以透過 `reco help` 列出目前支持的指令。
@@ -194,8 +250,7 @@ ps. listHtml 的 group pages.path 對應的是 webpack 的 entry
 1. 卸載舊版 reco: `tnpm un -g recombl`
 2. 安裝新版 reco: `tnpm i -gd @tencent/reco`
 3. 安裝 reco 重構工具箱: `tnpm i -gd @tencent/reco-toolkit-ui`
-
-ps. 如果要與舊版 recombl 並行使用，可以執行 `tnpm i -gd recombl@legacy` 安裝。安裝之後命令行名稱改為 `reco1`，指令和之前版本一樣。
+  > 如果要與舊版 recombl 並行使用，可以執行 `tnpm i -gd recombl@legacy` 安裝。安裝之後命令行名稱改為 `reco1`，指令和之前版本一樣。
 
 ### 注意點
 1. pageConfig.js 和 userConfig.js 合并到 reco-config.js (可以用 reco init 新增項目參考)
@@ -204,11 +259,9 @@ ps. 如果要與舊版 recombl 並行使用，可以執行 `tnpm i -gd recombl@l
     * name, author, repository 是用來統計頁面的
   ![package.json 配置](docs/pkg-json-config.png?raw=true)
 
-以上配置均可參考 qb-weather reco 分支 http://git.code.oa.com/rickiezheng/qb-weather/tree/reco
-
 ## FAQ
 1. Windows node-sass 安裝失敗
-![Windows node-sass build failure](/docs/win-install-node-sass-error.png)
+![Windows node-sass build failure](docs/win-install-node-sass-error.png?raw=true)
 ```bash
 npm install --global --production windows-build-tools
 ```

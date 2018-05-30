@@ -1,5 +1,9 @@
 {
   "%s defined template %s not found.": "%s 配置的模版 %s 找不到",
   "Port %s has been used. Try another port instead.": "端口 %s 已经被占用。尝试另一个端口。",
-  "Invalid port number of %s. Try another port number between 1 and 65535.": "无效的 %s 端口号。尝试另一个端口号于 1 和 65535 之间。"
+  "Invalid port number of %s. Try another port number between 1 and 65535.": "无效的 %s 端口号。尝试另一个端口号于 1 和 65535 之间。",
+  "Begin compressing": "开始压缩",
+  "End of compression": "完成压缩",
+  "Start uploading": "开始上传",
+  "Upload successfully": "上传成功"
 }
