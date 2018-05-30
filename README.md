@@ -9,8 +9,7 @@
 ### 安裝
 安裝 reco-cli & reco-toolkit-ui
 ```bash
-tnpm install -gd @tencent/reco
-tnpm install -gd @tencent/reco-toolkit-ui
+tnpm install -gd @tencent/reco @tencent/reco-toolkit-ui
 ```
 
 ### 創建新項目
@@ -96,6 +95,11 @@ module.exports = {
     }
   },
 
+  // https://github.com/beautify-web/js-beautify#options
+  jsbeautify: {
+    "indent_size": 2
+  },
+  
   upload: {
     project: pkgJson.name,
     user: pkgJson.author,
@@ -136,6 +140,48 @@ HtmlWebpackPlugin: {
 * upload - 指定 dir 根目錄，如果上傳 host 沒改，線上地址為 `http://wapstatic.sparta.html5.qq.com/{$user}/{$project}/`
 * sprites - 暫時無法使用
 
+#### 自動生成頁面列表
+工具支持自動生成頁面列表（list.html），單純列出webpack所配置所有入口html連結，如果要自定義list.html列表結構，請參考以下示例<br>
+Demo 1
+```
+module.exports = {
+  webpack: {
+    entry: {
+      index: ["index", "index-share", "share-edit", "share-card", "city-manage", "city-add", "city-search", "city-search-blank", "share-input", "loading", "city-popup"],
+    }
+  },
+  listHtml: {
+    title: '天气 3.0',
+    groups: [
+      {
+        title: '天气主页面',
+        pages: [
+          {name: '主页', path: 'index'}
+        ]
+      },
+      {
+        title: '城市管理',
+        pages: [
+          {name: '城市添加', path: 'city-add'},
+          {name: '城市管理', path: 'city-manage'},
+          {name: '城市管理（弹窗）', path: 'city-popup'},
+          {name: '城市搜索', path: 'city-search'},
+          {name: '城市搜索（空）', path: 'city-search-blank'},
+        ]
+      },
+      {
+        title: '分享',
+        pages: [
+          {name: '分享卡片', path: 'index-share'}
+        ]
+      }
+    ]
+  },
+}
+```
+ps. listHtml 的 group pages.path 對應的是 webpack 的 entry
+
+
 ### 支持指令
 如果 reco-cli 有找到項目相對應的 toolkit 可以透過 `reco help` 列出目前支持的指令。
 
@@ -162,7 +208,7 @@ ps. 如果要與舊版 recombl 並行使用，可以執行 `tnpm i -gd recombl@l
 
 ## FAQ
 1. Windows node-sass 安裝失敗
-![Windows node-sass build failure](docs/win-install-node-sass-error.png?raw=true)
+![Windows node-sass build failure](/docs/win-install-node-sass-error.png)
 ```bash
 npm install --global --production windows-build-tools
 ```
